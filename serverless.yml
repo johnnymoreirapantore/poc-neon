@@ -1,0 +1,33 @@
+service: poc-neon
+frameworkVersion: '4'
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  timeout: 30
+
+functions:
+  function1:
+    handler: index.handler
+    events:
+      - http:
+          path: /hello
+          method: get
+          cors: true
+  seed:
+    handler: functions/seed/index.seed
+    events:
+      - http:
+          path: /seed
+          method: get
+          cors: true
+  listCustomers:
+    handler: functions/customer/index.listCustomers
+    events:
+      - http:
+          path: /customers
+          method: get
+          cors: true
